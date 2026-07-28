@@ -64,7 +64,6 @@ docker compose up -d --build
 - **depends_on:** `app` aguarda `db` com `condition: service_healthy`
 - **Variáveis sensíveis:** Carregadas via `.env` (não versionado). Arquivo modelo entregue como `.env.example`.
 
-
 ---
 
 ## 6. Integração Contínua (GitHub Actions)
