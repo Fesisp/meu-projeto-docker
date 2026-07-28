@@ -10,7 +10,7 @@
 ## 1. Como executar este projeto
 
 ```bash
-git clone [URL-DO-SEU-REPOSITORIO]
+git clone https://github.com/Fesisp/meu-projeto-docker
 cd meu-projeto-docker
 cp .env.example .env
 docker compose up -d --build
@@ -32,13 +32,6 @@ docker compose up -d --build
 > **Por que o multi-stage ajuda?**  
 > O multi-stage build permite separar o ambiente de compilação/instalação de dependências do ambiente de execução final, resultando em imagens significativamente menores (sem ferramentas de build desnecessárias) e muito mais seguras por reduzir a superfície de ataque e rodar com usuário não-root.
 
-### Prints Parte 1:
-- **Print 1 — Build + docker images:**  
-  ![Print 1 - Build e Docker Images](docs/imagens/01-docker-build-images.png)
-
-- **Print 2 — Aplicação rodando no navegador com tarefas cadastradas:**  
-  ![Print 2 - App Rodando no Navegador](docs/imagens/02-app-rodando-navegador.png)
-
 ---
 
 ## 3. Volumes e persistência
@@ -47,13 +40,6 @@ docker compose up -d --build
 
 > **Diferença entre docker compose down e docker compose down -v:**  
 > O comando `docker compose down` apenas para e remove os containers e redes da stack mantendo os volumes intactos, enquanto `docker compose down -v` remove também todos os volumes declarados, apagando permanentemente os dados armazenados.
-
-### Prints Parte 2:
-- **Print 3 — SEM volume: dados perdidos ao recriar o container:**  
-  ![Print 3 - Sem Volume](docs/imagens/03-sem-volume-dados-perdidos.png)
-
-- **Print 4 — COM volume: dados preservados ao recriar o container:**  
-  ![Print 4 - Com Volume](docs/imagens/04-com-volume-dados-preservados.png)
 
 ---
 
@@ -67,13 +53,6 @@ docker compose up -d --build
 > **Por que o app consegue chamar o host mysql/db sem saber o IP?**  
 > O Docker possui um servidor DNS embutido em suas redes customizadas que resolve automaticamente o nome do serviço ou alias da rede para o IP interno do container correspondente.
 
-### Prints Parte 3:
-- **Print 5 — docker network inspect:**  
-  ![Print 5 - Docker Network Inspect](docs/imagens/05-docker-network-inspect.png)
-
-- **Print 6 — Dados dentro do MySQL (`select * from todo_items;`):**  
-  ![Print 6 - Select MySQL](docs/imagens/06-mysql-select-items.png)
-
 ---
 
 ## 5. Docker Compose
@@ -85,9 +64,6 @@ docker compose up -d --build
 - **depends_on:** `app` aguarda `db` com `condition: service_healthy`
 - **Variáveis sensíveis:** Carregadas via `.env` (não versionado). Arquivo modelo entregue como `.env.example`.
 
-### Prints Parte 4:
-- **Print 7 — docker compose ps:**  
-  ![Print 7 - Docker Compose PS](docs/imagens/07-docker-compose-ps.png)
 
 ---
 
@@ -102,9 +78,6 @@ docker compose up -d --build
   4. Aguardar a resposta da API e realizar smoke test via cURL (criar e consultar tarefa)
   5. Derrubar a stack e limpar volumes ao finalizar
 
-### Prints Parte 5:
-- **Print 8 — Execução do GitHub Actions (Verde / Sucesso):**  
-  ![Print 8 - CI Verde](docs/imagens/08-ci-execucao-verde.png)
 
 ---
 
@@ -114,11 +87,7 @@ docker compose up -d --build
 - **Erro que apareceu no log:** `Error: Cannot find module '/app/src/indexx.js'` seguido de encerramento do container (`exited with code 1`).
 - **Como o CI reagiu:** O step *"Aguardar a aplicação responder"* falhou após esgotar as 30 tentativas, pois o container `app` permanecia indisponível, acionando o dump de logs e abortando a execução com erro.
 - **Como eu corrigi:** Voltei o caminho do `CMD` para o arquivo correto `node src/index.js`, fiz commit e push na branch do PR.
-- **Link do Pull Request:** `https://github.com/[SEU-USUARIO]/meu-projeto-docker/pull/1`
-
-### Prints Parte 6:
-- **Print 9 — Execução do GitHub Actions (Vermelha / Falha) + Log do erro:**  
-  ![Print 9 - CI Vermelho com Erro](docs/imagens/09-ci-execucao-vermelha.png)
+- **Link do Pull Request:** `https://github.com/Fesisp/meu-projeto-docker/pull/1`
 
 ---
 
