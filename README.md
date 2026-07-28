@@ -78,7 +78,6 @@ docker compose up -d --build
   4. Aguardar a resposta da API e realizar smoke test via cURL (criar e consultar tarefa)
   5. Derrubar a stack e limpar volumes ao finalizar
 
-
 ---
 
 ## 7. Quebra proposital do CI
